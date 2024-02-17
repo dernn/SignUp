@@ -43,6 +43,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'sign',  # приложение регистрации, аутентификации и авторизации
     'protect',  # приложение "декоратор" для проверки аутентификации
+
+    # apps allauth
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    # ... регистрация посредством провайдера:
+    'allauth.socialaccount.providers.google',
 ]
 
 MIDDLEWARE = [
@@ -53,6 +60,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    # настройки middleware для allauth
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = 'simple_signup.urls'
@@ -67,6 +77,7 @@ TEMPLATES = [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
+                # `allauth` needs this from django
                 'django.contrib.messages.context_processors.messages',
             ],
         },
@@ -74,10 +85,11 @@ TEMPLATES = [
 ]
 
 # URL-адрес страницы аутентификации
-LOGIN_URL = 'sign/login/'
+LOGIN_URL = '/accounts/login/'  # теперь логин через allauth.account
 # редирект после успешного входа на сайт
 LOGIN_REDIRECT_URL = '/'
 
+# используется в случае, если данный проект управляет несколькими сайтами
 SITE_ID = 1
 
 # бэкенды аутентификации [для allauth]
@@ -85,6 +97,7 @@ AUTHENTICATION_BACKENDS = [
     # встроенный бэкенд Django, реализующий аутентификацию по username
     'django.contrib.auth.backends.ModelBackend',
     # бэкенд аутентификации, предоставленный пакетом allauth
+    # : по email или сервис-провайдеру
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
