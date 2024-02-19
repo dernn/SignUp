@@ -20,5 +20,8 @@ from django.urls import include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('protect.urls')),
-    path('sign/', include('sign.urls'))
+    path('sign/', include('sign.urls')),
+    # подтягиваем в URL-конфигурацию проекта приложение allauth.account
+    # перенаправляет с '/' на 'accounts/'
+    path('accounts/', include('allauth.urls')),
 ]

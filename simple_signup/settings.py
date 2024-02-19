@@ -101,6 +101,15 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
+# настройки allauth для входа/регистрации по email
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True
+# username не требуется
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+# подтверждение почты отключено
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+
 WSGI_APPLICATION = 'simple_signup.wsgi.application'
 
 
