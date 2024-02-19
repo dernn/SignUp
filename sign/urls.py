@@ -3,6 +3,8 @@ from django.urls import path
 from django.contrib.auth.views import LoginView, LogoutView
 from .views import BaseRegisterView
 
+from .views import upgrade_me
+
 # добавляем представления в файл конфигурации URL
 urlpatterns = [
     path('login/',
@@ -15,4 +17,6 @@ urlpatterns = [
     path('signup/',
          BaseRegisterView.as_view(template_name='sign/signup.html'),
          name='signup'),
+    # связываем кнопку "Хочу Premium!" из шаблона с функцией-представлением
+    path('upgrade/', upgrade_me, name='upgrade')
 ]

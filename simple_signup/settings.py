@@ -109,6 +109,8 @@ ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 # подтверждение почты отключено
 ACCOUNT_EMAIL_VERIFICATION = 'none'
+# замена стандартной формы регистрации кастомной
+ACCOUNT_FORMS = {'signup': 'sign.models.BasicSignupForm'}
 
 WSGI_APPLICATION = 'simple_signup.wsgi.application'
 
