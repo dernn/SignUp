@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 # чтобы при успешном прохождении регистрации добавлять пользователя к базовой группе
 from allauth.account.forms import SignupForm
 from django.contrib.auth.models import Group
-# Cрипты, относящиеся к формам, лучше хранить в отдельном файле forms.py,
+# Cкрипты, относящиеся к формам, лучше хранить в отдельном файле forms.py,
 # но для нас сейчас это не является принципиальным.
 from django import forms
 

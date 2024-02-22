@@ -1,6 +1,9 @@
 from django.contrib.auth.models import User
 from django.views.generic.edit import CreateView
-from .models import BaseRegisterForm  # созданная нами модель
+from django.views.generic import View
+# миксин для проверки наличия прав доступа
+from django.contrib.auth.mixins import PermissionRequiredMixin
+from .forms import BaseRegisterForm  # созданная нами модель
 # для апгрейда аккаунта до Premium
 from django.shortcuts import redirect
 from django.contrib.auth.models import Group
@@ -30,3 +33,12 @@ def upgrade_me(request):
         premium_group.user_set.add(user)
     # перенаправляем пользователя на корневую страницу
     return redirect('/')
+
+
+# эта вьюха здесь для примера, в приложение нигде не используется
+class MyView(PermissionRequiredMixin, View):  # <-- PermissionRequiredMixin : проверка прав доступа
+    # соглашение для именования разрешений, [view-add-delete-change]:
+    # <app>.<action>_<model>
+    permission_required = ('<app>.<action>_<model>',
+                           '<app>.<action>_<model>',)  # выдача разрешений
+    # для каждого разрешение здесь необходимо выдать такое же в админке
